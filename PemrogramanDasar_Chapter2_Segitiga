@@ -1,12 +1,20 @@
 #include <iostream>
-#include <Math.h>
 using namespace std;
 
-int main(){
-	int a,b,c;
-	cin >> a >> b >> c;
-	if(c==sqrt(pow(a,2)+pow(b,2)))
-		cout << "segitiga";
-	else
-		cout << "bukan segitiga";
+int main()
+{
+    short int a, b, c;
+    
+    cin >> a >> b >> c;
+
+    if (a + b > c){
+      if (a + c > b){
+        if (b + c > a){
+          cout << "segitiga";
+        }
+      }
+    }
+    else{
+      cout << "bukan segitiga";
+    }
 }
