@@ -8,4 +8,5 @@ int main(){
 		cout << "Hore ^_^";
 	else
 		cout << "Kecewa :(";
+	cout<<endl;
 }
