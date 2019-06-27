@@ -7,15 +7,9 @@ int main()
 
   cin >> a >> b >> c;
 
-  if (a + b > c)
+  if (a + b > c && a + c > b && b + c > a)
   {
-    if (a + c > b)
-    {
-      if (b + c > a)
-      {
-        cout << "segitiga\n";
-      }
-    }
+    cout << "segitiga\n";
   }
   else
   {
