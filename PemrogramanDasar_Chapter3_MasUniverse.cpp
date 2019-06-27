@@ -3,13 +3,12 @@ using namespace std;
 
 int main(){
 	int n,x;
-	int pi[10000];
-	x=1;
+	int p;
 	cin >> n;
 	for(int i=0;i<n;i++){
-		cin >> pi[i];
-		if(pi[i]>x){
-			x=pi[i];
+		cin >> p;
+		if(i=0){
+			x=p;
 		}
 	}
 	cout << x << endl;
