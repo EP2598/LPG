@@ -2,15 +2,22 @@
 using namespace std;
 
 int main(){
-	int n,x;
-	int pi[10000];
-	x=1;
+/*Deskripsi
+Format Masukan
+Baris pertama berisi sebuah bilangan bulat N, banyak peserta Mas Universe.
+
+Baris kedua berisi N buah bilangan bulat Pi, tingkat kekuatan tiap peserta.
+
+Format Keluaran
+Satu baris berisi sebuah bilangan bulat, tingkat kekuatan Mas Universe yang pertama.*/
+	int n, i, x=0;
 	cin >> n;
-	for(int i=0;i<n;i++){
-		cin >> pi[i];
-		if(pi[i]>x){
-			x=pi[i];
+	int kekuatan[n];
+	for (i=0; i<n; i++){
+		cin >> kekuatan[i];
+		if (x<kekuatan[i]){
+			x=kekuatan[i];
 		}
 	}
-	cout << x << endl;
+	cout << x << "\n";
 }
