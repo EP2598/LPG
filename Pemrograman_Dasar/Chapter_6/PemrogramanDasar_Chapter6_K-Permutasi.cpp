@@ -10,7 +10,7 @@ void kperm(int x, int n, int k, int curr)
     {
         cout << ans << endl;
     }
-    for (int i = 1; i <= n; i++)
+   for (int i = 1; i <= n; i++)
     {
         if (!arr[i] && (abs(curr - i) <= k))
         {
@@ -25,8 +25,8 @@ int main()
 {
     int n, k;
     cin >> n >> k;
-    arr = new bool[n];
-    for (int i = 0; i < n; i++)
+    arr = new bool[n+1];
+    for (int i = 0; i <= n; i++)
     {
         arr[i] = false;
     }
@@ -38,7 +38,7 @@ int main()
     for (int i = 1; i <= n; i++)
     {
         arr[i] = true;
-        ans[0]=char(48+i);
+        ans[0] = char(48 + i);
         kperm(1, n, k, i);
         arr[i] = false;
     }
