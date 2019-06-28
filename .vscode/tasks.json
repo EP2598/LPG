@@ -11,7 +11,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\run.exe"
+                "${workspaceFolder}\\run.exe"
             ],
             "options": {
                 "cwd": "C:\\MinGW\\bin"
