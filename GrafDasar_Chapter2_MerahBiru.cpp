@@ -1,122 +1,76 @@
-/*
-format input
-banyak titik garis
-garis
-garis
-garis
-cek terbentuk pas 2 warna
-(titik ga ada yg berteman dgn 2 warna berbeda)
- */
-
 #include <iostream>
+#include <vector>
 using namespace std;
 int n;
 
-void checkarr(bool arr[])
+void checkarr(vector<vector<bool>> arr)
 {
 	for (int i = 0; i < n; i++)
 	{
 		for (int ii = 0; ii < n; ii++)
 		{
-			cout << arr[i * n + ii];
+			cout << (bool)arr[i][ii];
 		}
 		cout << endl;
 	}
 }
-
-void sort(int x[], int arr[], int start, int end)
+bool dfs(vector<vector<bool>> graph, int vertex, vector<int> color, vector<bool> visited, int curr_col)
 {
-	if (start >= end)
-		return;
-	int point = arr[end];
-	int posi = start;
-	//cout<<"RUN";
-	for (int i = start; i < end; i++)
+	if (!visited[vertex])
 	{
-		if (point > arr[i])
+		visited[vertex] = true;
+		color[vertex] = curr_col;
+		bool temp = true;
+		//cout << "Checking vertex: " << vertex << endl;
+		for (int i = 0; i < n; i++)
 		{
-			int temp = arr[posi];
-			arr[posi] = arr[i];
-			arr[i] = temp;
-			//swap x[posi] x[i]
-			temp = x[posi];
-			x[posi] = x[i];
-			x[i] = temp;
-			posi++;
-		}
-	}
-	int temp = arr[posi];
-	arr[posi] = arr[end];
-	arr[end] = temp;
-	temp = x[posi];
-	x[posi] = x[end];
-	x[end] = temp;
-	sort(x, arr, start, posi - 1);
-	sort(x, arr, posi + 1, end);
-}
-
-void color(bool arr[])
-{
-	int* x = new int[n], * loc = new int[n], * color = new int[n];
-	for (int i = 0; i < n; i++)
-	{
-		color[i] = 0;
-		loc[i] = i;
-		x[i] = 0;
-		for (int ii = 0; ii < n; ii++)
-		{
-			x[i] += arr[i * n + ii];
-		}
-	}
-	/*
-	checkarr(arr);
-	for(int i=0;i<n;i++){
-		cout<<x[i]<<' ';
-	}*/
-	sort(loc, x, 0, n - 1);
-
-	for (int ii = n - 1; ii >= 0; ii--) { // loop dari yang paling gede (edge terbanyak)
-		for (int i = 1; i < 3; i++) { // kasi warna 1 atw 2
-			bool temp = true;
-
-			for (int j = 0; j < n; j++) { // loop semua yang berhubungan
-				if (arr[loc[ii] * n + j]) { // kalo berhubungan
-					if (color[j] == i) { // kalo ada warna sama skip
-						temp = false;
-						break;
-					}
+			if (i == vertex)
+				continue;
+			if (graph[vertex][i])
+			{
+				//cout << "    going to: " << i << " with expected color: " << (curr_col + 1) % 2 << endl;
+				temp = temp && dfs(graph, i, color, visited, (curr_col + 1) % 2);
+				if (!temp)
+				{
+					return false;
 				}
 			}
-			if (temp) // kalo warnanya beda kasi warna itu
-				color[loc[ii]] = i;
-                break;
 		}
-		if (color[loc[ii]] == 0) { // kalo gabisa dikasi warna 1 atw 2, out dari loop
-			cout << "TIDAK" << endl;
-			return;
-		}
+		return temp;
 	}
-	cout << "YA" << endl;
+	//cout << "       Checked, color: " << color[vertex] << endl;
+	if (color[vertex] != curr_col)
+	{
+		return false;
+	}
+	return true;
 }
-
 int main()
 {
 	int m;
 	cin >> n >> m;
-	bool* arr = new bool[n * n]; // bikin array 2d jadi 1d
-	for (int i = 0; i < n * n; i++)
-	{
-		arr[i] = false;
-	}
+	vector<vector<bool>> arr(n,vector<bool>(n));
+	vector<bool> visit(n);
+	vector<int> color(n, -1);
+	
 	for (int i = 0; i < m; i++)
 	{
 		int a, b;
 		cin >> a >> b;
 		a--;
 		b--;
-		arr[a * n + b] = true;
-		arr[b * n + a] = true;
+		arr[a][b] = true;
+		arr[b][a] = true;
 	}
-	//checkarr(arr, n);
-	color(arr);
+	//checkarr(arr);
+	//dfs(Graph,vertex,color,visited)
+
+	if (dfs(arr, 0, color, visit, 0))
+	{
+		cout << "YA" << endl;
+	}
+	else
+	{
+		cout << "TIDAK" << endl;
+	}
 }
