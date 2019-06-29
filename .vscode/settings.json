@@ -3,6 +3,7 @@
         "*.cu": "cuda",
         "ostream": "cpp",
         "iomanip": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "cmath": "cpp"
     }
 }
