@@ -1,4 +1,4 @@
-//mesti ganjil
+//mesti  ganjil 
 #include <iostream>
 using namespace std;
 
