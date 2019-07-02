@@ -1,6 +1,50 @@
 #include <iostream>
+
 using namespace std;
 int panx, pany;
+/*
+#include <stdio.h>
+#include <windows.h>
+void check(int x, int y, int xx, int yy)
+{
+    printf("%d %d %d %d\n", x, y, xx, yy);
+    for (int start = 0; start < y; start++)
+    {
+        for (int i = 0; i < panx; i++)
+        {
+            cout << ".";
+        }
+        cout << endl;
+    }
+    for (int start = y; start <= yy; start++)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            cout << ".";
+        }
+        for (int i = x; i <= xx; i++)
+        {
+            cout << "*";
+        }
+        for (int i = xx + 1; i < panx; i++)
+        {
+            cout << ".";
+        }
+        cout << endl;
+    }
+    for (int start = yy + 1; start < pany; start++)
+    {
+        for (int i = 0; i < panx; i++)
+        {
+            cout << ".";
+        }
+        cout << endl;
+    }
+    Sleep(1000);
+    system("cls");
+}
+ */
+
 
 long int find(int **arr, int **has)
 {
@@ -10,18 +54,10 @@ long int find(int **arr, int **has)
     for (int i = 1; i < panx; i++)
     {
         has[0][i] = arr[0][i] + has[0][i - 1];
-        if (has[0][i] > max)
-        {
-            max = has[0][i];
-        }
     }
     for (int i = 1; i < pany; i++)
     {
         has[i][0] = arr[i][0] + has[i - 1][0];
-        if (has[i][0] > max)
-        {
-            max = has[i][0];
-        }
     }
     //=======================================
     //itung matriksnya=======================
@@ -30,49 +66,34 @@ long int find(int **arr, int **has)
         for (int ii = 1; ii < panx; ii++)
         {
             has[i][ii] = arr[i][ii] + has[i][ii - 1] + has[i - 1][ii] - has[i - 1][ii - 1];
-            if (has[i][ii] > max)
-            {
-                max = has[i][ii];
-            }
         }
     }
-    //==========================================
-    //itung persegi paling atas sama paling kiri
-    long int temp;
-    for (int i = 0; i < pany - 1; i++)
+    //====================================
+    //itung kemungkinan persegi panjang laen
+    int temp;
+    for (int y = 0; y < pany; y++)
     {
-        for (int j = i + 1; j < pany; j++)
+        for (int x = 0; x < panx; x++)
         {
-            temp = has[j][0] - has[i][0];
-            if (temp > max)
+            for (int i = y; i < pany; i++)
             {
-                max = temp;
-            }
-        }
-    }
-    for (int i = 0; i < panx - 1; i++)
-    {
-        for (int j = i + 1; j < panx; j++)
-        {
-            temp = has[0][j] - has[0][i];
-            if (temp > max)
-            {
-                max = temp;
-            }
-        }
-    }
-    //================================================
-    //itung persegi sisanya==========================
-    //pq rs
-    for (int i = 1; i < pany - 1; i++)
-    {
-        for (int ii = 1; ii < panx - 1; ii++)
-        {
-            for (int j = i + 1; j < pany; j++)
-            {
-                for (int jj = ii + 1; jj < panx; jj++)
+                for (int ii = x; ii < panx; ii++)
                 {
-                    temp =has[j][jj]-has[j][ii-1]-has[i-1][jj]+has[i-1][ii-1];
+
+                    //check(x, y, ii, i);
+                    temp = has[i][ii];
+                    if (x - 1 >= 0)
+                    {
+                        temp -= has[i][x - 1];
+                    }
+                    if (y - 1 >= 0)
+                    {
+                        temp -= has[y - 1][ii];
+                    }
+                    if (y - 1 >= 0 && x - 1 >= 0)
+                    {
+                        temp += has[y - 1][x - 1];
+                    }
                     if (temp > max)
                     {
                         max = temp;
@@ -100,5 +121,6 @@ int main()
             cin >> arr[i][ii];
         }
     }
+
     cout << find(arr, has) << endl;
 }
