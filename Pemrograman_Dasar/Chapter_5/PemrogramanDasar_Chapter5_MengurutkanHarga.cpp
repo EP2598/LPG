@@ -19,7 +19,7 @@ int main(){
 	cin >> n;
 	int harga[n];
 	for (int i=0;i<n;i++){
-		cin>>harga[n];
+		cin>>harga[i];
 	}
 	mengurutkanHarga(n,harga);
 }
