@@ -1,8 +1,9 @@
 #include <iostream>
+#include <cstdint>
 using namespace std;
 int main(){
 	int t;
-	unsigned long long toni,tere;
+	uint64_t toni,tere;
 	string hasil[1001];
 	cin >> t;
 	for(int i=0; i<t;i++){

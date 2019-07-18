@@ -13,16 +13,17 @@ int main(){
 			temp+=a[ii];
 		}
 		hasil[i]=-1;
-		if((k*n)-temp<=0){
+		if((k*n)-temp<0){
 			bool lanjut=1;
 			int j=0;
+			
 			while(lanjut){
-				m=m+k-a[j%3];
+				m=m+k-a[j];
 				if(m<0){
 					hasil[i]=j-1;
 					lanjut=0;
 				}
-				j++;
+				j=(j+1)%n;
 			}
 		}
 	}
