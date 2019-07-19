@@ -41,7 +41,7 @@ int main(){
 			temp+=a[ii];
 		}
 	hasil[i]=-1;
-	if((k*n)-temp<=0){
+	if((k*n)-temp<0){
 	hasil[i]=func(m,n,k,temp,a);;
 	}
 	temp=0;
