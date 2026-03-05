@@ -1,0 +1,9 @@
+# LPG Repository
+Github ini dibuat untuk COMPFEST. Tolong submit filenya dengan rapih.
+
+## Contoh
+- **Title**: `PemrogramanDasar_Chapter1`
+- **Code**: Paste codenya
+
+---
+*Sekian*
